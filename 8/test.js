@@ -1,5 +1,6 @@
 const assert = require("assert");
 const Machine = require("./Machine");
+const ProgramFixer = require("./ProgramFixer");
 
 const source = `nop +0
 acc +1
@@ -37,18 +38,6 @@ try {
 
 assert(loopDetected);
 
-const modifiedSource = `nop +0
-acc +1
-jmp +4
-acc +3
-jmp -3
-acc -99
-acc +1
-jmp -4
-acc +6`;
+const programFixer = new ProgramFixer(source);
 
-machine.reset();
-machine.load(modifiedSource);
-
-const result = machine.run();
-assert(result === 8);
+assert(programFixer.run() === 8);
