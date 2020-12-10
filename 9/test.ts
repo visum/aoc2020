@@ -1,5 +1,5 @@
 import {assert, fail, assertEquals} from "https://deno.land/std/testing/asserts.ts";
-import {numberIsSumOfNumbers, findInvalidEntries} from "./lib.ts";
+import {numberIsSumOfNumbers, findInvalidEntries, findContiguousNumbersThatEqualNumber} from "./lib.ts";
 
 const testSet = `35
 20
@@ -39,8 +39,19 @@ Deno.test({
   name:"findInvalidEntries",
   fn(): void {
     const invalidEntries = findInvalidEntries(5, testSetArray);
-    console.log(invalidEntries);
+    console.log("Invalid entries:",invalidEntries);
     assert(invalidEntries[0] === 127);
     assert(invalidEntries.length === 1);
+  }
+});
+
+Deno.test({
+  name: "findContiguousNumbersThatEqualNumber",
+  fn(): void {
+    const numbers = findContiguousNumbersThatEqualNumber(127, testSetArray);
+    assert(numbers);
+    assert(numbers[0] === 15);
+    assert(numbers[3] === 40);
+    assert(numbers.length === 4);
   }
 });

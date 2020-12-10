@@ -16,14 +16,13 @@ const numberIsSumOfNumbers = (testNumber:Number, numbers:number[]):boolean => {
 }
 
 const findInvalidEntries = (lookbackSize:number, entries:number[]) => {
-  let testNumberIndex = entries[lookbackSize + 1];
+  let testNumberIndex = lookbackSize + 1;
   let invalidEntries = [];
   while (testNumberIndex < entries.length) {
     const numbers = entries.slice(testNumberIndex - lookbackSize, testNumberIndex);
     const testNumber = entries[testNumberIndex];
     const isValid = numberIsSumOfNumbers(testNumber, numbers);
-    console.log(`Testing ${testNumber} against ${numbers.join(",")}. valid: ${isValid}`);
-    if (isValid) {
+    if (!isValid) {
       invalidEntries.push(testNumber);
     }
     testNumberIndex += 1;
@@ -32,4 +31,27 @@ const findInvalidEntries = (lookbackSize:number, entries:number[]) => {
   return invalidEntries;
 };
 
-export {numberIsSumOfNumbers, findInvalidEntries};
+const findContiguousNumbersThatEqualNumber = (testNumber:number, entries:number[]) => {
+  let lowerBound = 0;
+  let upperBound = 1;
+  // Raise the upper bound until we reach or exceed the test number
+  // when we exceed the test number, raise the lower bound until we reach or go below the test number
+  while(lowerBound < entries.length - 2 && upperBound < entries.length - 1){
+    const range = entries.slice(lowerBound, upperBound+1);
+    const sum = range.reduce((sum, current) => sum + current, 0);
+    if (sum === testNumber){
+      return range;
+    }
+    if (sum < testNumber){
+      upperBound += 1;
+    }
+    if (sum > testNumber) {
+      lowerBound += 1;
+    }
+  }
+
+  console.log("No matching range of numbers was found");
+  return null;
+};
+
+export {numberIsSumOfNumbers, findInvalidEntries, findContiguousNumbersThatEqualNumber};
