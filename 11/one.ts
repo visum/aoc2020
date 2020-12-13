@@ -5,10 +5,8 @@ const seatLayout = Deno.readTextFileSync("./input.txt");
 const simulator = new SeatSimulator();
 simulator.loadLayout(seatLayout);
 
-simulator.runUntilStable();
-simulator.step();
-simulator.step();
+simulator.runUntilStable("adjacent");
 
-const occupiedWhenStable = simulator.countOccupiedSeats();
+const occupiedWhenStable = simulator.countSeatsWithStatus("occupied");
 
 console.log(`When stable, there are ${occupiedWhenStable} seats occupied`);

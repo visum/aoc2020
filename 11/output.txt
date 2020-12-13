@@ -1,0 +1,12 @@
+running 1 tests
+test runUntilStable ... Found 10 rows and 10 columns.
+[33m0[39m
+[33m71[39m
+[33m20[39m
+[33m51[39m
+[33m30[39m
+[33m37[39m
+[32mok[39m [90m[3m(8ms)[23m[39m
+
+test result: [32mok[39m. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out [90m[3m(9ms)[23m[39m
+
